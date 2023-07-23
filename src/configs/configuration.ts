@@ -6,20 +6,19 @@ export const appConfigs = registerAs('app', () => {
     env: process.env.NODE_ENV || 'development',
     port: parseInt(process.env.PORT, 10) || 3000,
     globalPrefix: process.env.GLOBAL_PREFIX || 'api',
-    mongodb: {
-      uri: process.env.MONGODB_URI,
-      dbName: process.env.MONGODB_DBNAME,
+    postgres: {
+      host: process.env.DB_HOST || 'localhost',
+      port: Number(process.env.DB_PORT) || 5432,
+      username: process.env.DB_USER || null,
+      password: process.env.DB_PASSWORD || null,
+      database: process.env.DB_USERNAME || 'postgres',
+      entityPaths: [__dirname + '/../**/*.entity{.ts,.js}'],
+      synchronize: Boolean(process.env.DB_SYNCHRONIZE) || true,
+      logging: Boolean(process.env.DB_LOGGING) || true,
     },
     jwt: {
-      secret: process.env.JWT_SECRET_KEY || '1',
+      secret: process.env.JWT_SECRET_KEY || 'secret',
       expiresIn: process.env.JWT_EXPIRES_IN || '4h',
-    },
-    aws: {
-      s3Region: process.env.S3_REGION || 'ap-southeast-1',
-      s3Bucket: process.env.S3_BUCKET || 'testnet-assets',
-      s3AccessKeyId: process.env.S3_ACCESS_KEY_ID,
-      s3SecretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-      s3BaseUrl: process.env.S3_BASE_URL,
     },
   };
 });
