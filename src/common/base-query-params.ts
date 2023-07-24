@@ -20,11 +20,6 @@ export class BaseQueryParams {
   @ApiProperty({
     required: false,
   })
-  fields: string;
-
-  @ApiProperty({
-    required: false,
-  })
   @Transform(({ value }) => {
     return [true, 'enabled', 'true'].indexOf(value) > -1;
   })
@@ -34,4 +29,10 @@ export class BaseQueryParams {
     required: false,
   })
   search: string;
+
+  @ApiProperty({ required: false, nullable: true })
+  @Transform(({ value }) => {
+    return [true, 'enabled', 'true'].indexOf(value) > -1;
+  })
+  isActive = true;
 }

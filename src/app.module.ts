@@ -3,9 +3,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import entities from 'entities';
 import { appConfigs } from 'configs';
-import { BannerModule } from 'modules/banner';
 import { AuthModule } from 'modules/auth';
 import { UserModule } from 'modules/users';
+import { BannerModule } from 'modules/banners';
+import { SystemModule } from 'modules/systems';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { UserModule } from 'modules/users';
     AuthModule,
     UserModule,
     BannerModule,
+    SystemModule,
   ],
   controllers: [],
   providers: [],

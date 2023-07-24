@@ -11,7 +11,7 @@ export class JobType extends BaseEntity {
   description: string;
 
   @ManyToMany(() => Job, (job) => job.jobTypes, {
-    cascade: true,
+    onDelete: 'CASCADE',
     orphanedRowAction: 'delete',
   })
   jobs: Job[];

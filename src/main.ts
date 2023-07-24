@@ -3,8 +3,8 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import {
   AppConfig,
-  appConfigs,
   HttpExceptionFilter,
+  appConfigs,
   configureSwagger,
 } from 'configs';
 

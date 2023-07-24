@@ -7,6 +7,8 @@ export const configureSwagger = (app: INestApplication) => {
   const baseApis = '/' + appConfig.globalPrefix;
   const baseUrl = baseApis.replace('//', '/');
   const swaggerDocOptions = new DocumentBuilder()
+    .setTitle('SF CMS API')
+    .setDescription(`API description for SF CMS`)
     .addServer(baseUrl)
     .addBearerAuth(
       {

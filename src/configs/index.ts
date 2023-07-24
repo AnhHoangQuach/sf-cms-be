@@ -1,3 +1,3 @@
 export * from './configuration';
-export * from './exception.filter';
+export * from './http-exception.filter';
 export * from './swagger.config';

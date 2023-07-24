@@ -1,7 +1,8 @@
-import { Controller, Get, Logger, Query } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BannerService } from './banner.service';
-import { FetchBannersParams } from './dto';
+import { BaseQueryParams } from 'common';
+import { CreateBannerDto } from './dto';
 
 @ApiTags('banners')
 @Controller('banners')
@@ -11,7 +12,12 @@ export class BannerController {
   private readonly logger = new Logger(BannerService.name);
 
   @Get('')
-  fetchBanners(@Query() params: FetchBannersParams) {
+  fetchBanners(@Query() params: BaseQueryParams) {
     return this.bannerService.fetchBanners(params);
+  }
+
+  @Post('')
+  createBanner(@Body() body: CreateBannerDto) {
+    return this.bannerService.createBanner(body);
   }
 }
