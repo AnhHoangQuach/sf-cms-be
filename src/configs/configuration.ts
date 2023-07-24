@@ -1,5 +1,6 @@
 import { Inject } from '@nestjs/common';
 import { ConfigType, registerAs } from '@nestjs/config';
+import entities from 'entities';
 
 export const appConfigs = registerAs('app', () => {
   return {
@@ -12,13 +13,13 @@ export const appConfigs = registerAs('app', () => {
       username: process.env.DB_USER || null,
       password: process.env.DB_PASSWORD || null,
       database: process.env.DB_USERNAME || 'postgres',
-      entityPaths: [__dirname + '/../**/*.entity{.ts,.js}'],
+      entityPaths: entities,
       synchronize: Boolean(process.env.DB_SYNCHRONIZE) || true,
       logging: Boolean(process.env.DB_LOGGING) || true,
     },
     jwt: {
       secret: process.env.JWT_SECRET_KEY || 'secret',
-      expiresIn: process.env.JWT_EXPIRES_IN || '4h',
+      expiresIn: process.env.JWT_EXPIRATION || '4h',
     },
   };
 });
