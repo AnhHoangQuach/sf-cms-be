@@ -1,23 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
-export class CreateBannerDto {
-  @ApiProperty()
+export class CreateSystemDto {
+  @ApiProperty({ required: false })
+  @IsBoolean()
+  @IsOptional()
+  underMaintenance: boolean;
+
+  @ApiProperty({ required: false })
   @IsString()
   @IsOptional()
-  name: string;
-
-  @ApiProperty()
-  @IsNumber()
-  @IsOptional()
-  index: number;
-
-  @ApiProperty()
-  @IsString()
-  @IsOptional()
-  description: string;
-
-  @ApiProperty()
-  @IsString()
-  image: string;
+  maintenanceMessage: string;
 }

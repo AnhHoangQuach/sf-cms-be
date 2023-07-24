@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Banner } from 'entities';
 import { DataSource } from 'typeorm';
 import { BaseQueryParams, BaseResultDto, PaginationDto } from 'common';
@@ -35,10 +35,22 @@ export class BannerService {
 
   async createBanner(
     payload: CreateBannerDto,
-  ): Promise<BaseResultDto<boolean>> {
+  ): Promise<BaseResultDto<BannerDto>> {
+    const banner = await this.dataSource.getRepository(Banner).save(payload);
+    return new BaseResultDto<BannerDto>(plainToInstance(BannerDto, banner));
+  }
+
+  async deleteBanner(id: number): Promise<BaseResultDto<boolean>> {
     const result = new BaseResultDto<boolean>();
 
-    await this.dataSource.getRepository(Banner).insert(payload);
+    const banner = await this.dataSource
+      .getRepository(Banner)
+      .findOne({ where: { id } });
+
+    if (!banner) throw new NotFoundException('Banner not found');
+
+    await this.dataSource.getRepository(Banner).delete(banner.id);
+
     result.success = true;
 
     return result;

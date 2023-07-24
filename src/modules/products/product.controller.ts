@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Logger, Post, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { BannerService } from './banner.service';
+import { BannerService } from './product.service';
 import { BaseQueryParams } from 'common';
 import { CreateBannerDto } from './dto';
 

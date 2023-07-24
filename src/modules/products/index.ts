@@ -1,3 +1,3 @@
-export * from './banner.module';
-export * from './banner.service';
-export * from './banner.controller';
+export * from './product.module';
+export * from './product.service';
+export * from './product.controller';
