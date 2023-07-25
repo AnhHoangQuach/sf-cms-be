@@ -12,6 +12,7 @@ import { IntroduceModule } from 'modules/introduces';
 import { ProductModule } from 'modules/products';
 import { JobModule } from 'modules/jobs';
 import { RequireModule } from 'modules/requires';
+import { JobApplyModule } from 'modules/job-applies';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { RequireModule } from 'modules/requires';
     ProductModule,
     JobModule,
     RequireModule,
+    JobApplyModule,
   ],
   controllers: [],
   providers: [],

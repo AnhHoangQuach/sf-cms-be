@@ -1,1 +1,1 @@
-export * from './create-banner.dto';
+export * from './create-job-apply.dto';
