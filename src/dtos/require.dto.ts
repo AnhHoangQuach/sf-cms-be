@@ -1,8 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 import { BaseDto } from './base-dto';
-import { BannerType } from 'enums';
-export class BannerDto extends BaseDto {
+export class RequireDto extends BaseDto {
   @ApiProperty()
   @Expose()
   id: number;
@@ -13,17 +12,25 @@ export class BannerDto extends BaseDto {
 
   @ApiProperty()
   @Expose()
-  index: number;
+  email: string;
+
+  @ApiProperty()
+  @Expose()
+  phone: string;
+
+  @ApiProperty()
+  @Expose()
+  requestedCompletionDate: Date;
+
+  @ApiProperty()
+  @Expose()
+  quantity: string;
+
+  @ApiProperty()
+  @Expose()
+  projectName: string;
 
   @ApiProperty()
   @Expose()
   description: string;
-
-  @ApiProperty()
-  @Expose()
-  image: string;
-
-  @ApiProperty()
-  @Expose()
-  type: BannerType;
 }

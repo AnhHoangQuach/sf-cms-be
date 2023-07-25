@@ -1,29 +1,32 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 import { BaseDto } from './base-dto';
-import { BannerType } from 'enums';
-export class BannerDto extends BaseDto {
+export class JobApplyDto extends BaseDto {
   @ApiProperty()
   @Expose()
   id: number;
 
   @ApiProperty()
   @Expose()
-  name: string;
+  jobId: string;
 
   @ApiProperty()
   @Expose()
-  index: number;
+  fullName: string;
 
   @ApiProperty()
   @Expose()
-  description: string;
+  email: string;
 
   @ApiProperty()
   @Expose()
-  image: string;
+  phone: string;
 
   @ApiProperty()
   @Expose()
-  type: BannerType;
+  cv: string;
+
+  @ApiProperty()
+  @Expose()
+  introduce: string;
 }

@@ -1,17 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString } from 'class-validator';
 
-export class CreateProductDto {
+export class CreateJobTypeDto {
   @ApiProperty()
   @IsString()
-  image: string;
+  name: string;
 
   @ApiProperty()
   @IsString()
   @IsOptional()
   description: string;
-
-  @ApiProperty()
-  @IsString()
-  logo: string;
 }

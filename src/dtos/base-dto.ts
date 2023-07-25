@@ -4,7 +4,7 @@ import { Expose } from 'class-transformer';
 export class BaseDto {
   @ApiProperty()
   @Expose()
-  id: string;
+  id: number;
 
   @ApiProperty()
   @Expose()

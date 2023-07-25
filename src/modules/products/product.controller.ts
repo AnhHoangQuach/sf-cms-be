@@ -1,23 +1,23 @@
 import { Body, Controller, Get, Logger, Post, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { BannerService } from './product.service';
+import { ProductService } from './product.service';
 import { BaseQueryParams } from 'common';
-import { CreateBannerDto } from './dto';
+import { CreateProductDto } from './dto';
 
-@ApiTags('banners')
-@Controller('banners')
-export class BannerController {
-  constructor(private readonly bannerService: BannerService) {}
+@ApiTags('products')
+@Controller('products')
+export class ProductController {
+  constructor(private readonly productService: ProductService) {}
 
-  private readonly logger = new Logger(BannerService.name);
+  private readonly logger = new Logger(ProductService.name);
 
   @Get('')
-  fetchBanners(@Query() params: BaseQueryParams) {
-    return this.bannerService.fetchBanners(params);
+  fetchProducts(@Query() params: BaseQueryParams) {
+    return this.productService.fetchProducts(params);
   }
 
   @Post('')
-  createBanner(@Body() body: CreateBannerDto) {
-    return this.bannerService.createBanner(body);
+  createProduct(@Body() body: CreateProductDto) {
+    return this.productService.createProduct(body);
   }
 }

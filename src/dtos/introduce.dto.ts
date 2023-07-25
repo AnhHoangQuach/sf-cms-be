@@ -1,16 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 import { BaseDto } from './base-dto';
-export class SystemDto extends BaseDto {
+import { IntroduceType } from 'enums';
+export class IntroduceDto extends BaseDto {
   @ApiProperty()
   @Expose()
   id: number;
 
   @ApiProperty()
   @Expose()
-  underMaintenance: boolean;
+  name: string;
 
   @ApiProperty()
   @Expose()
-  maintenanceMessage: string;
+  description: string;
+
+  @ApiProperty()
+  @Expose()
+  type: IntroduceType;
 }

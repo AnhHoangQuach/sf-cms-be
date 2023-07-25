@@ -7,6 +7,11 @@ import { AuthModule } from 'modules/auth';
 import { UserModule } from 'modules/users';
 import { BannerModule } from 'modules/banners';
 import { SystemModule } from 'modules/systems';
+import { JobTypeModule } from 'modules/job-types';
+import { IntroduceModule } from 'modules/introduces';
+import { ProductModule } from 'modules/products';
+import { JobModule } from 'modules/jobs';
+import { RequireModule } from 'modules/requires';
 
 @Module({
   imports: [
@@ -32,6 +37,11 @@ import { SystemModule } from 'modules/systems';
     UserModule,
     BannerModule,
     SystemModule,
+    JobTypeModule,
+    IntroduceModule,
+    ProductModule,
+    JobModule,
+    RequireModule,
   ],
   controllers: [],
   providers: [],

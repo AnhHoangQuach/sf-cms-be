@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IntroduceType } from 'enums';
 
-export class CreateBannerDto {
+export class CreateIntroduceDto {
   @ApiProperty()
   @IsString()
   @IsOptional()
@@ -10,14 +11,9 @@ export class CreateBannerDto {
   @ApiProperty()
   @IsNumber()
   @IsOptional()
-  index: number;
-
-  @ApiProperty()
-  @IsString()
-  @IsOptional()
   description: string;
 
   @ApiProperty()
-  @IsString()
-  image: string;
+  @IsEnum(IntroduceType)
+  type: IntroduceType;
 }

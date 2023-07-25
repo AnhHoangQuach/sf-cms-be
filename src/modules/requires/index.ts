@@ -1,3 +1,3 @@
-export * from './banner.module';
-export * from './banner.service';
-export * from './banner.controller';
+export * from './require.module';
+export * from './require.service';
+export * from './require.controller';

@@ -13,10 +13,10 @@ export class Require extends BaseEntity {
   phone: string;
 
   @Column()
-  requestedCompletionDate: string;
+  requestedCompletionDate: Date;
 
-  @Column({ nullable: true })
-  quantity: string;
+  @Column({ default: 0 })
+  quantity: number;
 
   @Column({ nullable: true })
   projectName: string;

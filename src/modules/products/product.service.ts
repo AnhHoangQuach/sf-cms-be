@@ -1,41 +1,41 @@
 import { Injectable } from '@nestjs/common';
-import { Banner } from 'entities';
+import { Product } from 'entities';
 import { DataSource } from 'typeorm';
 import { BaseQueryParams, BaseResultDto, PaginationDto } from 'common';
 import { plainToInstance } from 'class-transformer';
-import { BannerDto } from 'dtos';
-import { CreateBannerDto } from './dto';
+import { ProductDto } from 'dtos';
+import { CreateProductDto } from './dto';
 
 @Injectable()
-export class BannerService {
+export class ProductService {
   constructor(private readonly dataSource: DataSource) {}
 
-  async fetchBanners(
+  async fetchProducts(
     payload: BaseQueryParams,
-  ): Promise<BaseResultDto<PaginationDto<BannerDto>>> {
+  ): Promise<BaseResultDto<PaginationDto<ProductDto>>> {
     const { page, size } = payload;
-    const total = await this.dataSource.getRepository(Banner).count();
-    const banners = await this.dataSource.getRepository(Banner).find({
+    const total = await this.dataSource.getRepository(Product).count();
+    const products = await this.dataSource.getRepository(Product).find({
       skip: (page - 1) * size,
       take: size,
     });
 
-    const dtos = new PaginationDto<BannerDto>(
-      plainToInstance(BannerDto, banners, { excludeExtraneousValues: true }),
+    const dtos = new PaginationDto<ProductDto>(
+      plainToInstance(ProductDto, products, { excludeExtraneousValues: true }),
       total,
       page,
       size,
     );
 
-    return new BaseResultDto<PaginationDto<BannerDto>>(dtos, true);
+    return new BaseResultDto<PaginationDto<ProductDto>>(dtos, true);
   }
 
-  async createBanner(
-    payload: CreateBannerDto,
+  async createProduct(
+    payload: CreateProductDto,
   ): Promise<BaseResultDto<boolean>> {
     const result = new BaseResultDto<boolean>();
 
-    await this.dataSource.getRepository(Banner).insert(payload);
+    await this.dataSource.getRepository(Product).insert(payload);
     result.success = true;
 
     return result;

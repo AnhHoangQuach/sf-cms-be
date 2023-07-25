@@ -12,3 +12,9 @@ export enum BannerType {
   RECRUITMENT = 'RECRUITMENT',
   PRODUCT = 'PRODUCT',
 }
+
+export enum IntroduceType {
+  HOME_FUTURE = 'HOME_FUTURE',
+  HOME_SERVICE = 'HOME_SERVICE',
+  SERVICE = 'SERVICE',
+}

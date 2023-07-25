@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
+import { BannerType } from 'enums';
 
 export class CreateBannerDto {
   @ApiProperty()
@@ -20,4 +21,8 @@ export class CreateBannerDto {
   @ApiProperty()
   @IsString()
   image: string;
+
+  @ApiProperty()
+  @IsEnum(BannerType)
+  type: BannerType;
 }
