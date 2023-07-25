@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 import { BaseDto } from './base-dto';
+import { BannerType } from 'enums';
 export class BannerDto extends BaseDto {
   @ApiProperty()
   @Expose()
@@ -21,4 +22,8 @@ export class BannerDto extends BaseDto {
   @ApiProperty()
   @Expose()
   image: string;
+
+  @ApiProperty()
+  @Expose()
+  type: BannerType;
 }

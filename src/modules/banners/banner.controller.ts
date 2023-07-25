@@ -10,8 +10,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BannerService } from './banner.service';
-import { BaseQueryParams } from 'common';
-import { CreateBannerDto } from './dto';
+import { CreateBannerDto, FetchBannersDto } from './dto';
 import { Roles } from 'decorators/roles.decorator';
 import { Role } from 'enums';
 
@@ -23,7 +22,7 @@ export class BannerController {
   private readonly logger = new Logger(BannerService.name);
 
   @Get('')
-  fetchBanners(@Query() params: BaseQueryParams) {
+  fetchBanners(@Query() params: FetchBannersDto) {
     return this.bannerService.fetchBanners(params);
   }
 

@@ -1,36 +1,54 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Banner } from 'entities';
 import { DataSource } from 'typeorm';
-import { BaseQueryParams, BaseResultDto, PaginationDto } from 'common';
+import { BaseResultDto, PaginationDto } from 'common';
 import { plainToInstance } from 'class-transformer';
 import { BannerDto } from 'dtos';
-import { CreateBannerDto } from './dto';
+import { CreateBannerDto, FetchBannersDto } from './dto';
 
 @Injectable()
 export class BannerService {
   constructor(private readonly dataSource: DataSource) {}
 
   async fetchBanners(
-    payload: BaseQueryParams,
+    payload: FetchBannersDto,
   ): Promise<BaseResultDto<PaginationDto<BannerDto>>> {
-    const { page, size, isActive } = payload;
-    const total = await this.dataSource.getRepository(Banner).count();
-    const banners = await this.dataSource.getRepository(Banner).find({
-      skip: (page - 1) * size,
-      take: size,
-      where: {
-        isActive,
-      },
-    });
+    const { type, search, page, size, orderBy, desc } = payload;
 
-    const dtos = new PaginationDto<BannerDto>(
-      plainToInstance(BannerDto, banners, { excludeExtraneousValues: true }),
-      total,
-      page,
-      size,
+    const baseQuery = this.dataSource
+      .getRepository(Banner)
+      .createQueryBuilder('banner')
+      .where('banner.isActive = true');
+
+    if (search) {
+      baseQuery.andWhere('banner.name LIKE :search', {
+        search: `%${search}%`,
+      });
+    }
+    if (type) {
+      baseQuery.andWhere('banner.type=:type', {
+        type: type.toUpperCase(),
+      });
+    }
+    if (orderBy) {
+      baseQuery.orderBy(`banner.${orderBy}`, desc ? 'DESC' : 'ASC');
+    }
+    const total = await baseQuery.getCount();
+
+    const banners = await baseQuery
+      .skip(size * (page - 1))
+      .take(size)
+      .getMany();
+
+    return new BaseResultDto<PaginationDto<BannerDto>>(
+      new PaginationDto<BannerDto>(
+        plainToInstance(BannerDto, banners),
+        total,
+        page,
+        size,
+      ),
+      true,
     );
-
-    return new BaseResultDto<PaginationDto<BannerDto>>(dtos, true);
   }
 
   async createBanner(
