@@ -12,6 +12,7 @@ export class CreateRequireDto {
   email: string;
 
   @ApiProperty()
+  @IsOptional()
   @IsString()
   phone: string;
 
