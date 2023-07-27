@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Logger, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Logger,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BaseQueryParams } from 'common';
 import { JobService } from './job.service';
@@ -14,6 +22,11 @@ export class JobController {
   @Get('')
   fetchJobs(@Query() params: BaseQueryParams) {
     return this.jobService.fetchJobs(params);
+  }
+
+  @Get(':id')
+  getJob(@Param('id') id: number) {
+    return this.jobService.getJob(id);
   }
 
   @Post('')

@@ -48,6 +48,21 @@ export class JobTypeService {
     );
   }
 
+  async getJobType(id: number): Promise<BaseResultDto<any>> {
+    const result = new BaseResultDto<any>();
+
+    const jobType = await this.dataSource
+      .getRepository(JobType)
+      .findOne({ where: { id }, relations: ['jobs'] });
+
+    if (!jobType) throw new NotFoundException('Job type not found');
+
+    result.data = jobType;
+    result.success = true;
+
+    return result;
+  }
+
   async createJobType(
     payload: CreateJobTypeDto,
   ): Promise<BaseResultDto<boolean>> {

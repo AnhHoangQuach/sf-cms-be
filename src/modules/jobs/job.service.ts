@@ -30,6 +30,21 @@ export class JobService {
     return new BaseResultDto<PaginationDto<JobDto>>(dtos, true);
   }
 
+  async getJob(id: number): Promise<BaseResultDto<any>> {
+    const result = new BaseResultDto<any>();
+
+    const job = await this.dataSource
+      .getRepository(Job)
+      .findOne({ where: { id }, relations: ['jobTypes'] });
+
+    if (!job) throw new NotFoundException('Job not found');
+
+    result.data = job;
+    result.success = true;
+
+    return result;
+  }
+
   async createJob(payload: CreateJobDto): Promise<BaseResultDto<boolean>> {
     const result = new BaseResultDto<boolean>();
 

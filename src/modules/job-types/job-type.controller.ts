@@ -27,6 +27,11 @@ export class JobTypeController {
     return this.jobTypeService.fetchJobTypes(params);
   }
 
+  @Get(':id')
+  getJob(@Param('id') id: number) {
+    return this.jobTypeService.getJobType(id);
+  }
+
   @Roles(Role.ADMIN)
   @Post('')
   createJobType(@Body() body: CreateJobTypeDto) {
