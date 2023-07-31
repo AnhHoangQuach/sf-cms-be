@@ -7,3 +7,4 @@ export * from './job-type.dto';
 export * from './introduce.dto';
 export * from './require.dto';
 export * from './product.dto';
+export * from './user.dto';

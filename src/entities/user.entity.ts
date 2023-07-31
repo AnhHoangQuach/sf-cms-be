@@ -2,9 +2,17 @@ import { Role } from 'enums';
 import { Entity, Column, BeforeInsert, BeforeUpdate } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { BaseEntity } from './base.entity';
+import { Exclude, plainToClass } from 'class-transformer';
+import { UserDto } from 'dtos';
 
 @Entity()
 export class User extends BaseEntity {
+  toDto(): UserDto {
+    return plainToClass(UserDto, this, {
+      excludeExtraneousValues: true,
+    });
+  }
+
   @Column({ nullable: false, unique: true })
   email: string;
 
@@ -15,7 +23,8 @@ export class User extends BaseEntity {
   })
   role: string;
 
-  @Column({ select: false })
+  @Column()
+  @Exclude()
   password: string;
 
   @BeforeInsert()
@@ -26,7 +35,7 @@ export class User extends BaseEntity {
     }
   }
 
-  validatePassword(_password: string) {
-    return bcrypt.compareSync(_password, this.password);
+  validatePassword(password: string) {
+    return bcrypt.compareSync(password, this.password);
   }
 }

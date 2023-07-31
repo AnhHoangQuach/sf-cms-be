@@ -3,8 +3,9 @@ import { Controller, Get, Logger } from '@nestjs/common';
 import { UserService } from './user.service';
 import { BaseResultDto } from 'common';
 import { AuthUser } from 'decorators/auth-user.decorator';
-import { User } from 'entities';
 import { Roles } from 'decorators/roles.decorator';
+import { UserDto } from 'dtos';
+import { plainToClass } from 'class-transformer';
 
 @ApiTags('users')
 @Controller('users')
@@ -15,7 +16,9 @@ export class UsersController {
 
   @Roles()
   @Get('me')
-  getMe(@AuthUser() user: User) {
-    return new BaseResultDto(user);
+  getMe(@AuthUser() user: UserDto) {
+    return new BaseResultDto(
+      plainToClass(UserDto, user, { excludeExtraneousValues: true }),
+    );
   }
 }

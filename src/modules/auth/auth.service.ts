@@ -16,7 +16,7 @@ export class AuthService {
     const { email, password } = body;
     const user = await this.dataSource.getRepository(User).findOneBy({ email });
 
-    if (!user || !(await user.validatePassword(password)))
+    if (!user || !user.validatePassword(password))
       throw new NotAcceptableException('Wrong email or password');
 
     const payload = {
