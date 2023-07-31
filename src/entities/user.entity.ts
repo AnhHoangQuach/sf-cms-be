@@ -15,7 +15,7 @@ export class User extends BaseEntity {
   })
   role: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
   @BeforeInsert()
