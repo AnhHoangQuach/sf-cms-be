@@ -9,7 +9,7 @@ export class CreateIntroduceDto {
   name: string;
 
   @ApiProperty()
-  @IsNumber()
+  @IsString()
   @IsOptional()
   description: string;
 
